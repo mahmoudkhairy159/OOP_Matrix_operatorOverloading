@@ -2,10 +2,7 @@
 
 Problem-1
 Based on WikiPedia definition, In mathematics a Matrix is a rectangular [2D] array
-of Numbers, Symbols, or Expressions arranged in rows and columns. For Example
-the dimension of the below matrix are 2 x 3 because there is 2 rows and 3 columns.
-[ 1 9 −13
-20 5 −6 ]
+of Numbers, Symbols, or Expressions arranged in rows and columns. 
 it’s required to design and implement a Numerical matrix class(s), that can hold
 numerical types.
 The class should abstract matrix of any size and allocate the required memory as
