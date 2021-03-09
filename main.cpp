@@ -2,30 +2,36 @@
 
 using namespace std;
 
-
-class Matrix
-{
+template<typename T>
+class Matrix{
 private:
-    int **matrix;
-    int r;
-    int c;
+    int rows ,cols;
+    T **matrix;
 public:
-    Matrix( int rows=0,int cols=0)
-    {
-        r=rows;
-        c=cols;
-        matrix=new int*[rows];
-        for(int i=0; i<rows; i++)
-        {
-            matrix[i]=new int[cols];
+    Matrix(int rows , int cols){
+        this->rows=rows;
+        this->cols=cols;
+        this->matrix=new T*[rows];
+        for(int i =0; i<rows;i++){
+            matrix[i]=new T[cols];
         }
     }
 
+    ~Matrix(){
+        for(int i =0; i<rows;i++){
+            delete[]this->matrix[i];
+
+        }
+        delete[]this->matrix;
+        this->matrix=NULL;
+    }
+
+
     friend ostream &operator<<( ostream &output, const Matrix &m )
     {
-        for(int i=0; i<m.r; i++)
+        for(int i=0; i<m.rows; i++)
         {
-            for(int j=0; j<m.c; j++)
+            for(int j=0; j<m.cols; j++)
             {
                 output << m.matrix[i][j]<<"\t";
             }
@@ -36,9 +42,9 @@ public:
 
     friend istream &operator>>( istream  &input, Matrix &m )
     {
-        for(int i=0; i<m.r; i++)
+        for(int i=0; i<m.rows; i++)
         {
-            for(int j=0; j<m.c; j++)
+            for(int j=0; j<m.cols; j++)
             {
                 input>> m.matrix[i][j];
             }
@@ -46,102 +52,118 @@ public:
         return input;
     }
 
-    Matrix operator+(const Matrix& m)
-    {
-        Matrix temp(this->r,this->c);
-        for(int i=0; i<m.r; i++)
+
+     Matrix operator + (Matrix const &m){
+         Matrix <T>temp(this->rows,this->cols);
+        for(int i=0; i<m.rows; i++)
         {
-            for(int j=0; j<m.c; j++)
+            for(int j=0; j<m.cols; j++)
             {
                 temp.matrix[i][j] = this->matrix[i][j] + m.matrix[i][j];
             }
         }
-        return temp;
+         return temp;
     }
 
-    Matrix operator-(const Matrix& m)
-    {
-        Matrix temp(this->r,this->c);
-        for(int i=0; i<m.r; i++)
+    Matrix operator - (Matrix const &m){
+         Matrix <T>temp(this->rows,this->cols);
+        for(int i=0; i<m.rows; i++)
         {
-            for(int j=0; j<m.c; j++)
+            for(int j=0; j<m.cols; j++)
             {
                 temp.matrix[i][j] = this->matrix[i][j] - m.matrix[i][j];
             }
         }
-        return temp;
+         return temp;
     }
-    Matrix operator*(const Matrix& m)
-    {
-        Matrix temp(this->r,this->c);
-        for(int i=0; i<m.r; i++)
+
+
+    Matrix operator * (Matrix const &m){
+         Matrix <T>temp(this->rows,this->cols);
+        for(int i=0; i<m.rows; i++)
         {
-            for(int j=0; j<m.c; j++)
+            for(int j=0; j<m.cols; j++)
             {
-                temp.matrix[i][j] = this->matrix[i][j] * m.matrix[i][j];
+                temp.matrix[i][j] = this->matrix[i][j] *m.matrix[i][j];
             }
         }
-        return temp;
+         return temp;
     }
-    Matrix operator / (const Matrix& m)
-    {
-        Matrix temp(this->r,this->c);
-        for(int i=0; i<m.r; i++)
+    Matrix operator / (Matrix const &m){
+         Matrix <T>temp(this->rows,this->cols);
+        for(int i=0; i<m.rows; i++)
         {
-            for(int j=0; j<m.c; j++)
+            for(int j=0; j<m.cols; j++)
             {
                 temp.matrix[i][j] = this->matrix[i][j] / m.matrix[i][j];
             }
         }
-        return temp;
+         return temp;
     }
+
 
     void operator = (const Matrix &m )
     {
-        for(int i=0; i<m.r; i++)
+        for(int i=0; i<m.rows; i++)
         {
-            for(int j=0; j<m.c; j++)
+            for(int j=0; j<m.cols; j++)
             {
-                matrix[i][j]= m.matrix[i][j];
+                this->matrix[i][j]= m.matrix[i][j];
             }
         }
     }
 
-    void transpose ()
+     void transpose ()
     {
         cout<<"Transposed matrix: \n";
-        for (int i = 0; i < c; i++)
+        for (int i = 0; i < cols; i++)
         {
-            for (int j = 0; j < r; j++)
+            for (int j = 0; j < rows; j++)
             {
-                cout<<matrix[j][i]<<"\t";
+                cout<<this->matrix[j][i]<<"\t";
             }
             cout<<endl;
         }
 
     }
 
+
+
+
+
+
 };
-
-
 
 int main()
 {
-    Matrix m1(1,2);
-    Matrix m2(1,2);
-    Matrix m3(1,2);
-
+    Matrix<int>m1(2,2);
+    Matrix<int>m2(2,2);
+    Matrix<int>m3(2,2);
+    cout<<"Enter m1 \n";
     cin>>m1;
+    cout<<"Enter m2 \n";
     cin>>m2;
     m3=m1+m2;
-    cout<<"Addition: \n"<<m3<<endl;
+    cout<<"m1+m2 equals: \n";
+    cout<<m3;
     m3=m1-m2;
-    cout<<"Subtraction: \n"<<m3<<endl;
+    cout<<"m1-m2 equals: \n";
+    cout<<m3;
     m3=m1*m2;
-    cout<<"Multiplication: \n"<<m3<<endl;
-    m3=m1/m2;
-    cout<<"Division: \n"<<m3<<endl;
+    cout<<"m1 * m2 equals: \n";
+    cout<<m3;
+    m3=m1 / m2;
+    cout<<"m1 / m2 equals: \n";
+    cout<<m3;
     m3.transpose();
+
+
+
+
+
+
+
+
 
 
     return 0;
