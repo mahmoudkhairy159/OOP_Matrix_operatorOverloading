@@ -1,16 +1,16 @@
-# OOP_Matrix_operatorOverloading
+# OOP Matrix Operator Overloading
 
-Problem-1
-Based on WikiPedia definition, In mathematics a Matrix is a rectangular [2D] array
-of Numbers, Symbols, or Expressions arranged in rows and columns. 
-it’s required to design and implement a Numerical matrix class(s), that can hold
-numerical types.
-The class should abstract matrix of any size and allocate the required memory as
-needed based on the encapsulated rows and columns.
-It should have a destructor to free the used memory at the end of the lifetime of
-each object.
-Overload standard operators and I/O operators to enable Matrix class with
-addition, subtraction, and multiplication as well as suitable input and output
-capabilities “cin operator >> and cout operator”.
-Your matrix class should implement a method to transpose matrix.
-Matrix m(5,5); // will create matrix with 5 x 5.
+## Overview
+
+This project implements a **Matrix class** in C++ that allows users to create and manipulate numerical matrices. The class supports basic matrix operations such as addition, subtraction, and multiplication using operator overloading. It also includes methods for transposing a matrix and overloading input/output operators for easy interaction with the matrix.
+
+### Features:
+- **Dynamic Matrix Creation**: The class allows for the creation of a matrix of any size (e.g., `Matrix m(5, 5)` will create a 5x5 matrix).
+- **Operator Overloading**: 
+  - Addition (`+`)
+  - Subtraction (`-`)
+  - Multiplication (`*`)
+  - Input (`>>`)
+  - Output (`<<`)
+- **Transpose Method**: The class includes a function to transpose a matrix (swap rows and columns).
+- **Memory Management**: A destructor is implemented to free dynamically allocated memory when the object goes out of scope.
